@@ -1,4 +1,4 @@
-# angular-my-store
+# My Store App
 Simple UI for practicing in Angular 
 
 # Final UI
