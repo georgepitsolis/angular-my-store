@@ -1,0 +1,50 @@
+<div class="div-product-list">
+  <h2>Products</h2>
+
+  <div id="div-product" *ngFor="let product of products">
+    <div id="div-product-bar">
+      <h3 class="name">
+        <a [title]="product.name + ' details'">
+          {{ product.name }}
+        </a>
+      </h3>
+
+      <div id="div-price">
+        <h1 id="price-number">
+          {{ product.price }}
+        </h1>
+        <i class="bi bi-currency-dollar"></i>
+      </div>
+    </div>
+
+    <p class="description" *ngIf="product.description; else noDescription">
+      Description: {{ product.description }}
+    </p>
+    <ng-template #noDescription>
+      <p class="description">No description provided.</p>
+    </ng-template>
+
+    <div class="button-bar">
+      <button
+        type="button"
+        *ngIf="product.price <= 15; else soldOut"
+        (click)="addToCart()"
+      >
+        Add to Cart
+      </button>
+      <ng-template #soldOut>
+        <button
+          type="button"
+          disabled
+          style="pointer-events: none; background-color: #8b8b8b"
+        >
+          Sold Out
+        </button>
+      </ng-template>
+      <app-product-alerts
+        [product]="product"
+        (notify)="onNotify()"
+      ></app-product-alerts>
+    </div>
+  </div>
+</div>
